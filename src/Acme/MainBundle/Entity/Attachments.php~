@@ -1,0 +1,114 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Attachments
+ *
+ * @ORM\Table(name="attachments", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_47C4FAD659FFD0DF", columns={"customwave_id"})}, indexes={@ORM\Index(name="IDX_47C4FAD6A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_47C4FAD6727ACA70", columns={"parent_id"}), @ORM\Index(name="IDX_47C4FAD61BB0FD11", columns={"filesection_id"})})
+ * @ORM\Entity
+ */
+class Attachments
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="submitteddate", type="datetime", nullable=false)
+     */
+    private $submitteddate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="children", type="boolean", nullable=true)
+     */
+    private $children;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="submitby", type="string", length=20, nullable=true)
+     */
+    private $submitby;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255, nullable=true)
+     */
+    private $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Attachments
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Attachments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * })
+     */
+    private $parent;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Customwave
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Customwave")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customwave_id", referencedColumnName="id")
+     * })
+     */
+    private $customwave;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Filesection
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Filesection")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="filesection_id", referencedColumnName="id")
+     * })
+     */
+    private $filesection;
+
+
+}

@@ -1,0 +1,131 @@
+{% block head %}
+    
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>{% block title 'Dashboard: Albatross Portal Project' %}</title>
+	
+	<link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+	<base href="{{ asset('bundles/rapp/') }}" />
+	
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<link href="css/jquery.jqplot.css" rel="stylesheet" type="text/css">
+	<link href="css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css">
+	<link href="css/data-table.css" rel="stylesheet" type="text/css">
+	<link href="css/jquery.ui.tabs.css" rel="stylesheet" type="text/css">
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		  <script src="js/html5shiv.js"></script>
+		  <script src="js/respond.min.js"></script>
+		<![endif]-->
+	<!-- Bootstrap core JavaScript
+		================================================== -->
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui-1.8.18.custom.min.js"></script>
+	<!--Graph js files-->
+	<script src="js/jquery.jqplot.min.js"></script>
+	<script src="js/chart-plugins/jqplot.dateAxisRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.cursor.min.js"></script>
+	<script src="js/chart-plugins/jqplot.logAxisRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.highlighter.min.js"></script>
+	<script src="js/chart-plugins/jqplot.pieRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.barRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.categoryAxisRenderer.min.js"></script>
+	<script src="js/chart-plugins/jqplot.pointLabels.min.js"></script>
+	<script src="js/chart-plugins/jqplot.meterGaugeRenderer.min.js"></script>
+	<script src="js/jquery.peity.js"></script>
+	<script src="js/data-table.jquery.js"></script>
+	
+	<!-- Tabs -->
+	<script type="text/javascript" src="js/jquery.ui.tabs.js"></script>
+	
+	<!-- Tabs -->
+	<script type="text/javascript" src="js/custom.js"></script>
+{% endblock %}
+
+<!--Main container starts-->
+<div class="main-container">
+  <!--Header container starts-->	  
+  <div class="header-container">
+    <div class="header-left"> <span class="home-link"> <a href="index.html" class="icon-home"></a> </span> <a href="javascript:;" class="logo"><img src="images/logo.png" /></a>
+      <div class="filter-by-dpdwn"> <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Filter by <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">All</a></li>
+          <li><a href="#">Business Unit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="filter-by-dpdwn left"> <a href="javascript:;" class="dropdown-toggle username" data-toggle="dropdown">Ibougout <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">All</a></li>
+          <li><a href="#">Business Unit</a></li>
+        </ul>
+      </div>
+      <img src="images/user-icon.png" />
+      <div class="btn-toolbar pull-right notification-nav">
+        <div class="btn-group">
+          <div class="dropdown"> <a class="d-notification-button btn btn-notification dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope icon-large"><span class="notify-tip">30</span></i></a>
+            <div class="dropdown-menu pull-right "> <span class="notify-h"> You have 20 notifications</span><a class="msg-container clearfix"><span class="notification-thumb"><img src="images/notify-thumb.png" width="50" height="50" alt="user-thumb"></span><span class="notification-intro"> In hac habitasse platea dictumst. Aliquam posuere quam in nul<span class="notify-time"> 3 Hours Ago </span></span></a><a class="msg-container clearfix"><span class="notification-thumb"><i class="icon-file"></i></span><span class="notification-intro"><strong>Files </strong>In hac habitasse platea dictumst. Aliquam posuere<span class="notify-time"> 8 Hours Ago </span></span></a><a class="msg-container clearfix"><span class="notification-thumb"><img src="images/user-thumb.png" width="50" height="50" alt="user-thumb"></span><span class="notification-intro"> In hac habitasse platea dictumst. Aliquam posuere<span class="notify-time"> 3 Days Ago </span></span></a><a class="msg-container clearfix"><span class="notification-thumb"><i class=" icon-envelope-alt"></i></span><span class="notification-intro"><strong>Message</strong> In hac habitasse platea dictumst. Aliquam posuere<span class="notify-time"> 2 Weeks Ago </span></span></a>
+              <button class="btn btn-primary btn-large btn-block"> View All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Header container ends-->
+  
+  <!--Inner container starter-->
+  <div class="inner-container">
+    <div class="main-heading"> Dashboard </div>
+    <div class="top-inner breadcrumb"> <a href="javascript:;" class="icon-home"></a> &nbsp;Dashboard </div>
+    
+	<!--Top navigation starts-->
+	<div class="top-nav breadcrumb">
+      <ul>
+        <li><a class="user-link" href="#"><i class="icon-user"></i><span>User</span></a></li>
+        <li><a class="dashboard-link" href="#"><i class="icon-desktop"></i><span>Dashboard</span></a></li>
+        <li><a class="daily-link" href="#"><i class="icon-eye-open"></i><span>Daily</span></a></li>
+        <li><a class="operations-link" href="#"><i class="icon-flask"></i><span>Operations</span></a></li>
+        <li><a class="forecast-link" href="#"><i class="icon-cloud"></i><span>Forecast</span></a></li>
+        <li><a class="project-link" href="#"><i class="icon-file-alt"></i><span>Project</span></a></li>
+        <li><a class="iof-list-link" href="#"><i class="icon-list"></i><span>IOF List</span></a></li>
+        <li><a class="file-list-link" href="#"><i class="icon-files-o"></i><span>File List</span></a></li>
+      </ul>
+    </div>
+	<!--Top navigation ends-->
+	
+	<!--Dynamic body part comes here-->
+	{% block body %}
+		
+	{% endblock %}
+	<!--Dynamic body part comes here-->
+	
+  </div>
+  <!--Inner container ends-->
+  
+  <!--Footer container starts-->
+  <div class="footer-container"> 
+  	<div class="copy-text">&copy; Website by SEIRIM</div>
+  </div>
+  <!--Footer container ends-->
+  <div class="scroll-top">
+	<a title="Go Top" class="tip-top" href="#"><i class="icon-double-angle-up"></i></a>
+  </div>
+</div>
+<!--Main container ends-->
+</body>
+</html>
+	

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\Date" table="date">
+    <indexes>
+      <index name="IDX_AA9E377AE0319FBC" columns="bu_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="daily_date_bu_id_uniq" columns="daily_date,bu_id"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dailyDate" type="date" column="daily_date" nullable="false"/>
+    <field name="forecast" type="bigint" column="forecast" nullable="true"/>
+    <many-to-one field="bu" target-entity="Bu">
+      <join-columns>
+        <join-column name="bu_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

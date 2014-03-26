@@ -1,0 +1,70 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Infomation
+ *
+ * @ORM\Table(name="infomation", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_CAAF36E08AD4B571", columns={"recap_id"})})
+ * @ORM\Entity
+ */
+class Infomation
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="new_pos_in_Wave", type="string", length=255, nullable=true)
+     */
+    private $newPosInWave;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="delete_pos_in_Wave", type="string", length=255, nullable=true)
+     */
+    private $deletePosInWave;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="invalids_to_be_invoiced", type="string", length=255, nullable=true)
+     */
+    private $invalidsToBeInvoiced;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="misfires_to_be_invoiced", type="string", length=255, nullable=true)
+     */
+    private $misfiresToBeInvoiced;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="purchases_made", type="string", length=255, nullable=true)
+     */
+    private $purchasesMade;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Recap
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Recap")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="recap_id", referencedColumnName="id")
+     * })
+     */
+    private $recap;
+
+
+}

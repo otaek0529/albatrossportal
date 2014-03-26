@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: roleplayapp
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: mail.google.com
+    mailer_user: smart.rakeshphp@gmail.com
+    mailer_password: smartrakesh645
+    locale: en
+    secret: 94f819184f4f38524019afbcf26fade70ef51d80
+    database_path: null

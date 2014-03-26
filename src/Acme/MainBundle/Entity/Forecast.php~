@@ -1,0 +1,101 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Forecast
+ *
+ * @ORM\Table(name="forecast", indexes={@ORM\Index(name="IDX_2A9C78448DB60186", columns={"task_id"}), @ORM\Index(name="IDX_2A9C7844A76ED395", columns={"user_id"})})
+ * @ORM\Entity
+ */
+class Forecast
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fw_start_date", type="date", nullable=true)
+     */
+    private $fwStartDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fw_end_date", type="date", nullable=true)
+     */
+    private $fwEndDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="report_due_date", type="date", nullable=true)
+     */
+    private $reportDueDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="scope", type="string", length=255, nullable=true)
+     */
+    private $scope;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="editor", type="bigint", nullable=false)
+     */
+    private $editor;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="edittime", type="datetime", nullable=false)
+     */
+    private $edittime;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reportduetext", type="string", length=255, nullable=true)
+     */
+    private $reportduetext;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="report_type", type="boolean", nullable=false)
+     */
+    private $reportType;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Task
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Task")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="task_id", referencedColumnName="id")
+     * })
+     */
+    private $task;
+
+
+}

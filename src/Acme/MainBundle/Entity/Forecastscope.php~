@@ -1,0 +1,49 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Forecastscope
+ *
+ * @ORM\Table(name="forecastscope", uniqueConstraints={@ORM\UniqueConstraint(name="month_uniq", columns={"month", "bu_id"})}, indexes={@ORM\Index(name="IDX_9835AE95E0319FBC", columns={"bu_id"})})
+ * @ORM\Entity
+ */
+class Forecastscope
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="month", type="string", length=255, nullable=false)
+     */
+    private $month;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="forecast", type="bigint", nullable=true)
+     */
+    private $forecast;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Bu
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Bu")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="bu_id", referencedColumnName="id")
+     * })
+     */
+    private $bu;
+
+
+}

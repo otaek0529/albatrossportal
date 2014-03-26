@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\Task" table="task">
+    <indexes>
+      <index name="IDX_527EDB25166D1F9C" columns="project_id"/>
+      <index name="IDX_527EDB25FE54D947" columns="group_id"/>
+      <index name="IDX_527EDB25DAADA679" columns="task_type_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="ace_id_uniq" columns="ace_id"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="resume" type="string" column="resume" length="255" nullable="false"/>
+    <field name="number" type="bigint" column="number" nullable="false"/>
+    <field name="status" type="string" column="status" length="255" nullable="false"/>
+    <field name="percentageDone" type="bigint" column="percentage_done" nullable="false"/>
+    <field name="actualPercentageDone" type="float" column="actual_percentage_done" precision="10" scale="0" nullable="false"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="true"/>
+    <field name="aceId" type="bigint" column="ace_id" nullable="false"/>
+    <field name="aolPercent" type="bigint" column="aol_percent" nullable="true"/>
+    <field name="statusId" type="bigint" column="status_id" nullable="false"/>
+    <field name="updatedAol" type="boolean" column="updated_aol" nullable="false"/>
+    <field name="fwStartDate" type="string" column="fw_start_date" length="255" nullable="true"/>
+    <field name="fwEndDate" type="string" column="fw_end_date" length="255" nullable="true"/>
+    <field name="reportDueDate" type="string" column="report_due_date" length="255" nullable="true"/>
+    <field name="scope" type="bigint" column="scope" nullable="true"/>
+    <field name="pm" type="string" column="pm" length="255" nullable="true"/>
+    <field name="projectNumber" type="string" column="project_number" length="255" nullable="true"/>
+    <field name="updated" type="boolean" column="updated" nullable="false"/>
+    <many-to-one field="group" target-entity="Group">
+      <join-columns>
+        <join-column name="group_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="taskType" target-entity="TaskType">
+      <join-columns>
+        <join-column name="task_type_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="project" target-entity="Project">
+      <join-columns>
+        <join-column name="project_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

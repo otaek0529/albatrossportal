@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\UserPermissiongroup" table="user_permissiongroup">
+    <indexes>
+      <index name="IDX_73F7C3F1A76ED395" columns="user_id"/>
+      <index name="IDX_73F7C3F1BD0DD96D" columns="permissiongroup_id"/>
+    </indexes>
+    <id name="userId" type="integer" column="user_id"/>
+    <id name="permissiongroupId" type="bigint" column="permissiongroup_id"/>
+  </entity>
+</doctrine-mapping>

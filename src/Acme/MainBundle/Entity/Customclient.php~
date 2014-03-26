@@ -1,0 +1,71 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Customclient
+ *
+ * @ORM\Table(name="customclient", uniqueConstraints={@ORM\UniqueConstraint(name="name_uniq", columns={"name"})}, indexes={@ORM\Index(name="IDX_8E7110A0D8217C47", columns={"clientgroup_id"})})
+ * @ORM\Entity
+ */
+class Customclient
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="logo", type="string", length=255, nullable=true)
+     */
+    private $logo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Clientgroup
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Clientgroup")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="clientgroup_id", referencedColumnName="id")
+     * })
+     */
+    private $clientgroup;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\User", mappedBy="customclient")
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Operationquestionnaire", mappedBy="customclient")
+     */
+    private $operationquestionnaire;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->operationquestionnaire = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

@@ -1,0 +1,73 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ioffile
+ *
+ * @ORM\Table(name="ioffile", indexes={@ORM\Index(name="IDX_C14900269D1F836B", columns={"attachments_id"}), @ORM\Index(name="IDX_C1490026D4454269", columns={"iofmessage_id"})})
+ * @ORM\Entity
+ */
+class Ioffile
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255, nullable=true)
+     */
+    private $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="formindex", type="bigint", nullable=false)
+     */
+    private $formindex;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formindex2", type="string", length=20, nullable=false)
+     */
+    private $formindex2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Iofmessage
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Iofmessage")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="iofmessage_id", referencedColumnName="id")
+     * })
+     */
+    private $iofmessage;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Attachments
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Attachments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="attachments_id", referencedColumnName="id")
+     * })
+     */
+    private $attachments;
+
+
+}

@@ -1,0 +1,52 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Number
+ *
+ * @ORM\Table(name="number", uniqueConstraints={@ORM\UniqueConstraint(name="date_status_uniq", columns={"date_id", "status_id"})}, indexes={@ORM\Index(name="IDX_96901F54B897366B", columns={"date_id"}), @ORM\Index(name="IDX_96901F546BF700BD", columns={"status_id"})})
+ * @ORM\Entity
+ */
+class Number
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="number", type="bigint", nullable=false)
+     */
+    private $number;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Date
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Date")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="date_id", referencedColumnName="id")
+     * })
+     */
+    private $date;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Status
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Status")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     * })
+     */
+    private $status;
+
+
+}

@@ -1,0 +1,77 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SurveyNumber
+ *
+ * @ORM\Table(name="survey_number", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_BE9ED7388AD4B571", columns={"recap_id"})})
+ * @ORM\Entity
+ */
+class SurveyNumber
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pos", type="string", length=255, nullable=true)
+     */
+    private $pos;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surveys", type="string", length=255, nullable=true)
+     */
+    private $surveys;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="misfire", type="string", length=255, nullable=true)
+     */
+    private $misfire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="invalid", type="string", length=255, nullable=true)
+     */
+    private $invalid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="scenarios", type="text", nullable=true)
+     */
+    private $scenarios;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=64, nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Recap
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Recap")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="recap_id", referencedColumnName="id")
+     * })
+     */
+    private $recap;
+
+
+}

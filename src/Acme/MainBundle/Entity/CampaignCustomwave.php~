@@ -1,0 +1,45 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CampaignCustomwave
+ *
+ * @ORM\Table(name="campaign_customwave", indexes={@ORM\Index(name="IDX_FDC16F9AF639F774", columns={"campaign_id"}), @ORM\Index(name="IDX_FDC16F9A59FFD0DF", columns={"customwave_id"})})
+ * @ORM\Entity
+ */
+class CampaignCustomwave
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Campaign
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Campaign")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="campaign_id", referencedColumnName="id")
+     * })
+     */
+    private $campaign;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Customwave
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Customwave")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customwave_id", referencedColumnName="id")
+     * })
+     */
+    private $customwave;
+
+
+}

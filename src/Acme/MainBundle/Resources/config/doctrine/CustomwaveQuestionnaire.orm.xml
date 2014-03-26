@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\CustomwaveQuestionnaire" table="customwave_questionnaire">
+    <indexes>
+      <index name="IDX_1F74A9259FFD0DF" columns="customwave_id"/>
+      <index name="IDX_1F74A92CE07E8FF" columns="questionnaire_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="questionnaire" target-entity="Questionnaire">
+      <join-columns>
+        <join-column name="questionnaire_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="customwave" target-entity="Customwave">
+      <join-columns>
+        <join-column name="customwave_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

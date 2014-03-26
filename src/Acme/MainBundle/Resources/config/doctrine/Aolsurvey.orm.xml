@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\Aolsurvey" table="aolsurvey">
+    <indexes>
+      <index name="IDX_F4512F90F639F774" columns="campaign_id"/>
+      <index name="IDX_F4512F902C7C2CBA" columns="workflow_id"/>
+      <index name="IDX_F4512F9064D218E" columns="location_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="surveyinstanceid_uniq" columns="survey_instance_id"/>
+      <unique-constraint name="UNIQ_F4512F903B025C87" columns="billing_id"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="surveyInstanceId" type="bigint" column="survey_instance_id" nullable="false"/>
+    <field name="rfasOpen" type="bigint" column="rfas_open" nullable="false"/>
+    <field name="rfasClosed" type="bigint" column="rfas_closed" nullable="false"/>
+    <field name="isReturnedToShopper" type="boolean" column="is_returned_to_shopper" nullable="false"/>
+    <field name="isNoDecline" type="boolean" column="is_no_decline" nullable="false"/>
+    <field name="surveyStatusName" type="string" column="survey_status_name" length="255" nullable="false"/>
+    <field name="date" type="string" column="date" length="255" nullable="false"/>
+    <field name="client" type="string" column="client" length="255" nullable="false"/>
+    <field name="submitTime" type="datetime" column="submit_time" nullable="false"/>
+    <field name="mailBoxName" type="string" column="mail_box_name" length="255" nullable="true"/>
+    <many-to-one field="campaign" target-entity="Campaign">
+      <join-columns>
+        <join-column name="campaign_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="location" target-entity="Location">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="billing" target-entity="Billing">
+      <join-columns>
+        <join-column name="billing_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="workflow" target-entity="Workflow">
+      <join-columns>
+        <join-column name="workflow_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

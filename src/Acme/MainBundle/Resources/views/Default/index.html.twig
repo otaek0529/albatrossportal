@@ -1,0 +1,382 @@
+{% extends "MainBundle::layout.html.twig" %}
+
+{% block body %}
+
+<!--Graph container starts-->
+<div class="inner-row">
+  <div class="inner-left">
+	<h3>Forecast</h3>
+	<div class="graph-container">
+	  <div id="chart1"></div>
+	</div>
+  </div>
+  <div class="inner-right">
+	<h3>Daily</h3>
+	<div class="graph-container">
+	  <div class="chart-label"> <span><span></span></span> Today's Forecast, % </div>
+	  <div class="pie-chart-outer">
+		<div class="pie_chart"> 
+			<span class="inner_circle"></span> 
+				<span class="pie">
+					{{(todayForecastVal<=0)?0:1}}/{{(todayForecastVal>0)?todayForecastVal:1}}
+				</span> 
+			</div>
+	  </div>
+	  <div class="pie-chart-outer">
+		<div class="pie_chart"> 
+			<span class="inner_circle"></span> 
+				<span class="pie">
+					{{(todayPrevForecastVal<=0)?0:1}}/{{(todayPrevForecastVal>0)?todayPrevForecastVal:1}}
+				</span> 
+			</div>
+	  </div>
+	  <div class="chart-label"> <span class="orangeBg"><span></span></span> Today's Forecast for<br/>
+		Previous Year, % </div>
+	</div>
+  </div>
+</div>
+<!--Graph container ends-->
+
+<!--Widget container starts-->
+<div class="inner-row">
+  <div class="inner-widgets">
+	<div class="widget-title">Forecast in Total <span class="icon-dashboard"></span></div>
+	<div class="widget-body">
+	  <div class="activities_chart"> <span class="activities_chart">{{forecast1[0].fcast}},{{forecast1[1].fcast}},{{forecast1[2].fcast}},{{forecast1[3].fcast}},{{forecast1[4].fcast}},{{forecast1[5].fcast}},{{forecast1[6].fcast}},{{forecast1[7].fcast}},{{forecast1[8].fcast}},{{forecast1[9].fcast}},{{forecast1[10].fcast}},{{forecast1[11].fcast}}</span> </div>
+	  <div class="bottom-text"> Total: {{forecast1[0].fcast+forecast1[1].fcast+forecast1[2].fcast+forecast1[3].fcast+forecast1[4].fcast+forecast1[5].fcast+forecast1[6].fcast+forecast1[7].fcast+forecast1[8].fcast+forecast1[9].fcast+forecast1[10].fcast+forecast1[11].fcast}} </div>
+	</div>
+  </div>
+  <div class="inner-widgets">
+	<div class="widget-title">Assigned Surveys <span class="icon-dashboard"></span></div>
+	<div class="widget-body">
+	  <div class="activities_chart">
+	  	<span class="activities_chart">
+			{% set sumAssSurveys = 0 %}
+			{% for sur in assSurveys %}
+				{{ sur.surveys }},
+				{% set sumAssSurveys = sumAssSurveys + sur.surveys %}
+			{% endfor %}
+		</span>
+	  </div>
+	  <div class="bottom-text"> Total: {{sumAssSurveys}} </div>
+	</div>
+  </div>
+  <div class="inner-widgets">
+	<div class="widget-title">Submitted Surveys <span class="icon-dashboard"></span></div>
+	<div class="widget-body">
+	  <div class="activities_chart">
+	  	<span class="activities_chart">
+			{% set sumSubSurveys = 0 %}
+			{% for ssur in subSurveys %}
+				{{ ssur.surveys }},
+				{% set sumSubSurveys = sumSubSurveys + ssur.surveys %}
+			{% endfor %}
+		</span>
+	  </div>
+	  <div class="bottom-text"> Total: {{sumSubSurveys}} </div>
+	</div>
+  </div>
+  <div class="inner-widgets">
+	<div class="widget-title">Validated Surveys <span class="icon-dashboard"></span></div>
+	<div class="widget-body">
+	  <div class="activities_chart">
+	  	<span class="activities_chart">
+			{% set sumValSurveys = 0 %}
+			{% for vsur in valSurveys %}
+				{{ vsur.surveys }},
+				{% set sumValSurveys = sumValSurveys + vsur.surveys %}
+			{% endfor %}
+		</span>
+	  </div>
+	  <div class="bottom-text"> Total: {{sumValSurveys}} </div>
+	</div>
+  </div>
+  <div class="inner-widgets last-widget">
+	<div class="widget-title">Pending Validation <span class="icon-dashboard"></span></div>
+	<div class="widget-body">
+	  <div class="pending_validation_chart"> 
+	  	<span class="pending_validation_chart">
+			{% set sumPenSurveys = 0 %}
+			{% for psur in penSurveys %}
+				{{ psur.surveys }},
+				{% set sumPenSurveys = sumPenSurveys + psur.surveys %}
+			{% endfor %}
+		</span> 
+	  </div>
+	  <div class="bottom-text"> Total: {{sumPenSurveys}} </div>
+	</div>
+  </div>
+</div>
+<!--Widget container ends-->
+
+<!--Table & Comments container starts-->
+<div class="inner-row">
+  
+  <!--Table container starts-->
+  <div class="inner-left no-bg">
+	<div class="border-heading">AOL Questionnaries Pending Confirmation</div>
+	<div class="inner-row">
+	  <table class="display data_tbl" border="1" bordercolor="#dcdddf">
+		<thead>
+		  <tr>
+			<th> No. </th>
+			<th> Client </th>
+			<th> Wave </th>
+			<th> Submit Time </th>
+			<th> Pending Confirmation </th>
+		  </tr>
+		</thead>
+		<tbody>
+		
+			{% for pen in pendingQuesData %}
+			  <tr>
+				<td>{{pen[0]}}</td>
+				<td>{{pen[1]|raw}}</td>
+				<td>{{pen[2]|raw}}</td>
+				<td>{{pen[3]}}</td>
+				<td align="center">{{pen[4]|raw}}</td>
+			  </tr>
+			{% endfor %}
+		  
+		   
+		</tbody>
+		<tfoot>
+		  <tr>
+			<th> No. </th>
+			<th> Client </th>
+			<th> Wave </th>
+			<th> Submit Time </th>
+			<th> Pending Confirmation </th>
+		  </tr>
+		</tfoot>
+	  </table>
+	</div>
+  </div>
+  <!--Table container ends-->
+  
+  <!--Comments container starts-->
+  <div class="inner-right no-bg">
+	<div class="border-heading">Comments &amp; Uploads</div>
+	<div class="inner-row"> 
+		<div id="tabs">
+						
+			<ul>
+				<li><a href="#tabs-1"><span class="icon-cloud-upload"></span> Uploads</a></li>
+				<li><a href="#tabs-2"><span class="icon-comments"></span> Comments</a></li>
+				
+			</ul>
+			
+			<div id="tabs-1">
+			
+				<div class="row-uploads">
+					<div class="left-upload"><span class="status blue1">IOF</span></div>
+					<div class="right-upload">
+						<div class="inner-row upper">
+							<div class="ul-center-upload">
+								<a href="javascript:;">IOF CN LVMH Sephora Wholesale R September wave 2013</a>
+							</div>
+							<div class="ur-center-upload">
+								<a href="javascript:;"><span class="status blue"><span class="icon-upload-alt"></span> Download</span></a>
+							</div>
+						</div>
+						<div class="inner-row">
+							<div class="bl-center-upload"><b>TYPE:</b> IOF file</div>
+							<div class="br-center-upload"><b>Uploaded:</b> 2013-08-21</div>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="row-uploads">
+					<div class="left-upload"><span class="status blue1">IOF</span></div>
+					<div class="right-upload">
+						<div class="inner-row upper">
+							<div class="ul-center-upload">
+								<a href="javascript:;">IIOF-CN LS Travel Retail W3 Sept</a>
+							</div>
+							<div class="ur-center-upload">
+								<a href="javascript:;"><span class="status blue"><span class="icon-upload-alt"></span> Download</span></a>
+							</div>
+						</div>
+						<div class="inner-row">
+							<div class="bl-center-upload"><b>TYPE:</b> IOF file</div>
+							<div class="br-center-upload"><b>Uploaded:</b> 2013-08-21</div>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="row-uploads">
+					<div class="left-upload"><img src="images/green-list.png" /></div>
+					<div class="right-upload">
+						<div class="inner-row upper">
+							<div class="ul-center-upload">
+								<a href="javascript:;">Leave Application Form</a>
+							</div>
+							<div class="ur-center-upload">
+								<a href="javascript:;"><span class="status blue"><span class="icon-upload-alt"></span> Download</span></a>
+							</div>
+						</div>
+						<div class="inner-row">
+							<div class="bl-center-upload"><b>TYPE:</b> Leave Application Form</div>
+							<div class="br-center-upload"><b>Uploaded:</b> 2013-08-21</div>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="row-uploads">
+					<div class="left-upload"><img src="images/green-sales.png" /></div>
+					<div class="right-upload">
+						<div class="inner-row upper">
+							<div class="ul-center-upload">
+								<a href="javascript:;">Sales PPT</a>
+							</div>
+							<div class="ur-center-upload">
+								<a href="javascript:;"><span class="status blue"><span class="icon-upload-alt"></span> Download</span></a>
+							</div>
+						</div>
+						<div class="inner-row">
+							<div class="bl-center-upload"><b>TYPE:</b> Leave Application Form</div>
+							<div class="br-center-upload"><b>Uploaded:</b> 2013-08-21</div>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="row-uploads">
+					<div class="left-upload"><img src="images/orange-list.png" /></div>
+					<div class="right-upload">
+						<div class="inner-row upper">
+							<div class="ul-center-upload">
+								<a href="javascript:;">Check List for PM</a>
+							</div>
+							<div class="ur-center-upload">
+								<a href="javascript:;"><span class="status blue"><span class="icon-upload-alt"></span> Download</span></a>
+							</div>
+						</div>
+						<div class="inner-row">
+							<div class="bl-center-upload"><b>TYPE:</b> Leave Application Form</div>
+							<div class="br-center-upload"><b>Uploaded:</b> 2013-08-21</div>
+						</div>
+					</div>	
+				</div>
+				
+			</div>
+			
+			<div id="tabs-2">
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+				Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate...</p>
+			</div>
+			
+		</div>
+	</div>
+  </div>
+  <!--Comments container ends-->
+</div>
+<!--Table & Comments container ends-->	
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+	$.jqplot._noToImageButton = true;
+	
+	var currYear = [["{{forecast1[0].month}}-01",{{(forecast1[0].fcast>0)?forecast1[0].fcast:1}}],
+					["{{forecast1[1].month}}-01",{{(forecast1[1].fcast>0)?forecast1[1].fcast:1}}],
+					["{{forecast1[2].month}}-01",{{(forecast1[2].fcast>0)?forecast1[2].fcast:1}}],
+					["{{forecast1[3].month}}-01",{{(forecast1[3].fcast>0)?forecast1[3].fcast:1}}],
+					["{{forecast1[4].month}}-01",{{(forecast1[4].fcast>0)?forecast1[4].fcast:1}}], 
+					["{{forecast1[5].month}}-01",{{(forecast1[5].fcast>0)?forecast1[5].fcast:1}}], 
+					["{{forecast1[6].month}}-01",{{(forecast1[6].fcast>0)?forecast1[6].fcast:1}}], 
+					["{{forecast1[7].month}}-01",{{(forecast1[7].fcast>0)?forecast1[7].fcast:1}}], 
+					["{{forecast1[8].month}}-01",{{(forecast1[8].fcast>0)?forecast1[8].fcast:1}}],
+					["{{forecast1[9].month}}-01",{{(forecast1[9].fcast>0)?forecast1[9].fcast:1}}], 
+					["{{forecast1[10].month}}-01",{{(forecast1[10].fcast>0)?forecast1[10].fcast:1}}],
+					["{{forecast1[11].month}}-01",{{(forecast1[11].fcast>0)?forecast1[11].fcast:1}}], 
+					["{{forecast1[12].month}}-01",{{(forecast1[12].fcast>0)?forecast1[12].fcast:1}}]];
+	
+	var prevYear = [["{{forecast1[0].month}}-01",{{(forecast2[0].fcast>0)?forecast2[0].fcast:1}}],
+					["{{forecast1[1].month}}-01",{{(forecast2[1].fcast>0)?forecast2[1].fcast:1}}],
+					["{{forecast1[2].month}}-01",{{(forecast2[2].fcast>0)?forecast2[2].fcast:1}}],
+					["{{forecast1[3].month}}-01",{{(forecast2[3].fcast>0)?forecast2[3].fcast:1}}],
+					["{{forecast1[4].month}}-01",{{(forecast2[4].fcast>0)?forecast2[4].fcast:1}}], 
+					["{{forecast1[5].month}}-01",{{(forecast2[5].fcast>0)?forecast2[5].fcast:1}}], 
+					["{{forecast1[6].month}}-01",{{(forecast2[6].fcast>0)?forecast2[6].fcast:1}}], 
+					["{{forecast1[7].month}}-01",{{(forecast2[7].fcast>0)?forecast2[7].fcast:1}}], 
+					["{{forecast1[8].month}}-01",{{(forecast2[8].fcast>0)?forecast2[8].fcast:1}}],
+					["{{forecast1[9].month}}-01",{{(forecast2[9].fcast>0)?forecast2[9].fcast:1}}], 
+					["{{forecast1[10].month}}-01",{{(forecast2[10].fcast>0)?forecast2[10].fcast:1}}], 
+					["{{forecast1[11].month}}-01",{{(forecast2[11].fcast>0)?forecast2[11].fcast:1}}],
+					["{{forecast1[12].month}}-01",{{(forecast2[12].fcast>0)?forecast2[12].fcast:1}}]];
+	
+	var plot1 = $.jqplot("chart1", [currYear,prevYear], {
+		seriesColors: ["rgb(203, 190, 220)","rgba(241, 182, 30, 0.7)"],
+		title: '',
+		highlighter: {
+			show: true,
+			sizeAdjust: 1,
+			tooltipOffset: 9
+		},
+		grid: {
+			background: 'rgba(57,57,57,0.0)',
+			drawBorder: true,
+			shadow: false,
+			gridLineColor: '#fffffd',
+			gridLineWidth: 2
+		},
+		legend: {
+			show: true,
+			placement: 'inside'
+		},
+		seriesDefaults: {
+			rendererOptions: {
+				smooth: false,
+				animation: {
+					show: true
+				}
+			},
+			showMarker: true
+		},
+		series: [
+			{
+				fill: true,
+				label: 'This Year'
+			},
+			{
+				label: 'Last Year'
+			}
+		],
+		axesDefaults: {
+			rendererOptions: {
+				baselineWidth: 1.5,
+				baselineColor: '#444444',
+				drawBaseline: true
+			}
+		},
+		axes: {
+			xaxis: {
+				renderer: $.jqplot.DateAxisRenderer,
+				tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+				tickOptions: {
+					formatString: "%b %y", //"%b %e"
+					angle: -30,
+					textColor: '#666'
+				},
+				min: "{{currMonthFrom}}-01",
+				max: "{{currMonthTo}}-01",
+				tickInterval: "1 month",
+				drawMajorGridlines: true
+			},
+			yaxis: {
+				renderer: $.jqplot.LogAxisRenderer,
+				pad: 0,
+				rendererOptions: {
+					minorTicks: 1
+				},
+				tickOptions: {
+					formatString: "%'d",
+					showMark: false
+				}
+			}
+		}
+	});
+});
+</script>
+
+{% endblock %}

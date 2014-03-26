@@ -1,0 +1,63 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Survey
+ *
+ * @ORM\Table(name="survey", uniqueConstraints={@ORM\UniqueConstraint(name="aol_id_uniq", columns={"aol_id"})}, indexes={@ORM\Index(name="IDX_AD5F9BFC19EB6921", columns={"client_id"})})
+ * @ORM\Entity
+ */
+class Survey
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="survey_name", type="string", length=255, nullable=false)
+     */
+    private $surveyName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="aol_id", type="bigint", nullable=false)
+     */
+    private $aolId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Client
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
+     */
+    private $client;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Rules", mappedBy="survey")
+     */
+    private $rules;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rules = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

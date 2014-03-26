@@ -1,0 +1,56 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Iofmessage
+ *
+ * @ORM\Table(name="iofmessage", indexes={@ORM\Index(name="IDX_70F74F849D1F836B", columns={"attachments_id"})})
+ * @ORM\Entity
+ */
+class Iofmessage
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="text", nullable=true)
+     */
+    private $message;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formindex", type="string", length=20, nullable=false)
+     */
+    private $formindex;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formindex2", type="string", length=20, nullable=false)
+     */
+    private $formindex2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Attachments
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Attachments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="attachments_id", referencedColumnName="id")
+     * })
+     */
+    private $attachments;
+
+
+}

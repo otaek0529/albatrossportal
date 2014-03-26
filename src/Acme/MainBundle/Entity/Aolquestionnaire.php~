@@ -1,0 +1,64 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Aolquestionnaire
+ *
+ * @ORM\Table(name="aolquestionnaire", indexes={@ORM\Index(name="IDX_C3DEC41437268F00", columns={"customfield_id"})})
+ * @ORM\Entity
+ */
+class Aolquestionnaire
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Acme\MainBundle\Entity\Customfield
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\MainBundle\Entity\Customfield")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customfield_id", referencedColumnName="id")
+     * })
+     */
+    private $customfield;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Recap", inversedBy="aolquestionnaire")
+     * @ORM\JoinTable(name="aolquestionnaire_recap",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="aolquestionnaire_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="recap_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $recap;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->recap = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

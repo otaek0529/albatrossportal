@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\MainBundle\Entity\Survey" table="survey">
+    <indexes>
+      <index name="IDX_AD5F9BFC19EB6921" columns="client_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="aol_id_uniq" columns="aol_id"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="surveyName" type="string" column="survey_name" length="255" nullable="false"/>
+    <field name="aolId" type="bigint" column="aol_id" nullable="false"/>
+    <many-to-one field="client" target-entity="Client">
+      <join-columns>
+        <join-column name="client_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="rules" target-entity="Rules" mapped-by="survey"/>
+  </entity>
+</doctrine-mapping>
